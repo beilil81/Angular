@@ -1,0 +1,25 @@
+<h1>
+  {{title}}
+</h1>
+<h2>
+  {{version}}
+</h2>
+<input [(ngModel)]="newItem.reference">
+<input [(ngModel)]="newItem.name">
+<input [(ngModel)]="newItem.state">
+   {{newItem | json }}
+<button (click)="createObject()">ajout commande</button>
+
+<div *ngFor="let item of collection">
+  <p>Référence : {{item.reference}}</p>
+  <p>Nom : {{item.name}}</p>
+
+  <p class="state-0" *ngIf="0==item.state">A livrer</p>
+  <p class="state-1" *ngIf="1==item.state">En cours de livraison</p>
+  <p class="state-2" *ngIf="2==item.state">Commande livrée</p>
+  <button (click)="getDetails($event, 'test')" id="{{item.reference}}">Détail</button>
+ 
+ 
+  <br>
+
+</div>

@@ -1,0 +1,11 @@
+<h1>
+  {{title}}
+</h1>
+<h2>
+  {{version}}
+</h2>
+
+
+<div *ngFor="let itemform of collection">
+      <item-component [itemform]="itemform" (onGetDetails)="getDetails($event)"></item-component>
+</div>

@@ -1,0 +1,19 @@
+
+<h1>
+  {{title}}
+</h1>
+<h2>
+  {{version}}
+</h2>
+
+  <!--{{collection | json }}-->
+<div *ngFor="let item of collection">
+    <p>Référence : {{item.reference}}</p>
+    <p>Nom : {{item.name}}</p>
+    <!--0==item.state : yoda code-->
+    <p class="state-0" *ngIf="0==item.state">A livrer</p> 
+    <p class="state-1" *ngIf="1==item.state">En cours de livraison</p> 
+    <p class="state-2" *ngIf="2==item.state">Commande livrée</p> 
+    <hr>
+
+</div>
