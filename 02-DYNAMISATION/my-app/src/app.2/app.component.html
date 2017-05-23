@@ -1,15 +1,15 @@
-
+<!-- afficher variables dans template html -->
 <h1>
-  {{title}}
+  {{ title }}
 </h1>
 <h2>
-  {{version}}
+  {{ version }}
 </h2>
-
-  <!--{{collection | json }}-->
-<div *ngFor="let item of collection">
-    <p>Référence : {{item.reference}}</p>
-    <p>Nom : {{item.name}}</p>
-    <hr>
-
+ <!--13.2.1 add input pour saisi d'une chaine de recherche avec ref et keyup-->
+Filter la liste : <input #listFilter (keyup)="0">
+<itemform-component (onCreateObject)="createObject($event)"></itemform-component>
+   <!--13.2.2 utilisation du pipe dans la boucle ngFor sur la collection -->
+<div *ngFor="let item of collection | itemFilter:listFilter.value">
+  <item-component [item]="item" (onGetDetails)="getDetails($event)"></item-component> 
+ 
 </div>

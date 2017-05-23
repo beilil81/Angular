@@ -22,24 +22,16 @@ export class AppComponent { // (export pour rendre la classe "exportable")
   constructor(){
     this.title = Config.APP_TITLE; // 8.2.2 use constante dans constructor 
     this.version = Config.APP_VERSION; // 8.2.2 use constante dans constructor 
-    //this.newItem = {reference: '', name: '', state: 0};
-    //this.resetItem();
     // 2.1.2 init collection
     this.collection = Config.COLLECTION_BASE;
   }
-  
-  // fonction getDetails
-  public getDetails(item: Item){ 
-      console.log(item); // 11.3.1 recuperer l'item et l'afficher dans la console.
-  }  
 
   public createObject(item: Item){
-    this.collection.push(item);
+    //this.collection.push(item);
+    this.collection.unshift(item); // ajoute au debut du tableau et non a la fin comme avec push
+    // setTimeout( ()=> { // disparait au bout de 2 sec
+    //   item.animateState = 'removed'; // c'est le fait de mettre 'removed' qui fait disparaitre l'element
+    // },2000 );
   }
 
-  // parti dans itemform.component.ts
-  // // on vide l'objet
-  // public resetItem(){
-  //   this.newItem = new Item({reference: '', name: '', state: 0}); // 7.2.5 instances newItem dans resetItem()
-  // }
-}
+} // end, ne pas supprimer

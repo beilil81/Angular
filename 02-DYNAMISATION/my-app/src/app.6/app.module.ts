@@ -4,17 +4,26 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { ItemComponent } from './item.component';
+import { ItemFormComponent } from './itemform.component';
+import { ItemPipe } from './pipes/item.filter'; 
+import { TitleModule } from './title/title.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ItemComponent, 
+    ItemFormComponent,
+    ItemPipe 
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    TitleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { } // export pour rendre la classe "exportable"
+

@@ -1,200 +1,146 @@
-RACCOURCI CLAVIER :
--indentation auto : SHIFT +ALT+F
--retour ligne auto : ALT + Z
--undo : CTRL +Z
+CHAPITRE 1 -BOOTSTRAP --------------------------------------------
 
-CHAPITRE 1 - CONSTRUCTOR - VISIBILITE -TYPAGE ---
-
-    1.1 app.component.ts
-        1.1.1 créer constructeur qui initialise 2 variables
-        1.1.2 déclarer 2 variables avec visibilité et typage dans notre class
-    1.2 app.component.html    
-        1.2.1 afficher variables dans le template html
-
-CHAPITRE 2 - CREER BOUCLE SUR UN TABLEAU --------
-
-        on veut créer un tableau d'objet avec commandes fictives pour les afficher dans le template à l'aide
-        d'une BOUCLE
-     2.1 app.component.ts
-         2.1.1 declarer variablescollection dans la class
-         2.1.2 init collection dans le constructeur
-     2.2 app.component.html
-         2.2.1 utiliser directive *ngFor pour afficher la collection dans la BOUCLE
-         2.2.2 afficher chaque item dans la boucle à l'aide de 2 p 
+    1.1 NPM INSTALL BOWER -G
+    1.2 BOWER INSTALL BOOTSTRAP SU MY-APP
+    1.3 AJOUTER CHEMIN BOOTSTRAP.CSS DANS .ANGULAR-CLI.JSON
+    1.4 ajouter class bootstrap sur index.html
+    1.5 ahjouter class bootstrap sur item.component.html
+    1.6 ajouter class bootstrap sur itemform.component.html
+    1.7 supprimer button getDetails sur item.component.html
+    1.8 supprimer OutPut, EventEmitter, et methode getDetails() sur item.component.ts
+    1.9 supprimer methode getDetails sur app.compoent.ts
 
 
- CHAPITRE 3 - CONDITIONNER L'AFFICHAGE--------
-         On veut afficher à l'utilisateur l'état d'une commande (à livrer, 
-         en cours de livraison, commande livrée)
-    3.1 app.component.ts
-         3.1.1 ajout p)rpriété aux objects de la collection
-    3.2 app.component.html
-         3.2.1 directive *ngIf pour conditionner
-         l'affichage des états
+CHAPITRE 2 - ANIMATION ANGULAR----------------------------------------
+    créer une animation avec angular 
 
- CHAPITRE 4 - STYLES DES COMPOSANTS--------         
-      Ajouter des styles globales et des styles propres à un composant
+    2.1 item.componet.ts
+       2.1.1 import trigger, state, styles, transition, animate
+       2.1.2 créer fonction changeState()
 
-      4.1 styles.css 
-          4.1.1 ajout css sur les class state-0, state-1, state-2 et
-          et inspecteur d'element
+    2.2 item.component.html   
+       2.2.1 ajout click pour appeler fonction toggleAnimateState()
 
-       4.2 app.component.css
-           4.2.1 couper coller les css de styles.css vers app.component.css 
+    2.3 models/item.ts
+       2.3.1 declarer variable animateState   
+       2.3.2 init variable dans le constructeur
+       2.3.3 créer fonction toggleAnimateState()
 
-  CHAPITRE 5 - Event click--------  
-            5.1 app.componet.html
-               5.1.1 add button avec click pour appel getDetails() en lui passant $event enargument, et un argument personnalisé
-               5.1.2 add attribut id dans le button avec item.reference comme valeur
+   pour utiliser les animations angular 
+   npm install @angular/animations --save
 
-            5.2 app.componet.ts
-               5.2.1 créer fonction getDetails()
-               5.2.2 récupérer et affiché dans un console.log $event
+   2.4 app.module.ts
+       2.4.1 import { BrowserAnimationModule } from '@angular/platform-browser/animation
+       2.4.2 declaration dans les imports
+   2.5 item.component.ts
+        2.5.1 creation animations dans@component
+   2.6 item.component.html
+        referncé le trigger sur le div panel-default et cabler à la proprièté animateState       
 
 
-               on veut récuper l'élement html à l'origine du click et la valeur de son
-               attr id
-
-               5.2.3 variable elem pour récupérer l'element html à l'origine du click
-               5.2.4 afficher la valeur récupéré
-               5.2.5 afficher valeur att id
-               5.2.6 afficher 2e argument presonnalisé                
+CHAPITRE 3 - ANNIMATION EN ENTREE ET EN SORTIE AVEC * ET VOID ------------------
+   on veut faire une animation quand un item est ajouté dans le dom, puis faire une autre animation
+   pour le faire disparaitre apères quelques secondes     
      
-  CHAPITRE 6 - UTILISER UN EVENT POUR CREER UN OBJET --------
-               on veut créer un button pour ajouter une commande dans la collection
-
-            6.1 app.component.html
-                 6.1.1 add button avec click qui appel createObject() 
-
-             6.2 app.comonent.ts    
-                 6.2.1  push un objet dans la collection
-
-       on veut permettre à l'utilisateur  de saisir lui même une commande
-                  6.3.1  add 3 balises input avec directive ngModel cablé à un nouvel objet newItem
-            
-           6.4 app.component.html
-                  6.4.1  declarer private newItem
-                  6.4.2 init newItem dans le constructeur
-                  6.4.3  push newItem dans createObject()
-                  6.4.4 creer fonction resetItem() pour vider l'objet
-                  6.4.5 utiliser resetItem() dans le constructeur
-                  6.4.6 utiliser resetItem dans createPbject()                         
-                  
-
-     
-  CHAPITRE 7 - CREER UN MODEL POUR LA COLLECTION --------
-
-            on veut creer une class pour la collection et l'utiliser pour le composant
-            on ncrée un dossier models
-            on crée un fichier models/items.ts
+       3.1 app.componet.ts
+            3.1.1 ajouter un setTimeOut dans la méthode createObject() pour passer l'état 
+            à remove après 2 secondes
+            3.1.2 remplacer push par un unShift pour add item au debut de declaration
+       3.2 item.componet.ts
+            3.2.1 créer deux transitionsde void (n'existe pas dans le dom) vers n'importe quel etat et
+             de n'import quel etat vers void
+       3.3 item.componetn.html
+             3.3.1 ajouter un *ngIf pour masquer le div pannel si état ===removed
+             3.3.2 ajouter div avec 2 btn pour passer d'une etat à l'autre grace
+             grâce à a méthode changeState()        
 
 
-            7.1 item.ts
-                  7.1.1 creer class Item()
-                  7.1.2 3 private
-                  7.1.3 constructeur qui prend un obket en argument
-            7.2 app.component.ts
-                7.2.1 import de la class Item
-                7.2.2 typage newItem
-                7.2.3 instance de newItem dans constructeur
-                7.2.4 instance newItem dans resetItem()     
-                7.2.4 typage collection en Item[]  
-                   
+CHAPITRE 4 - EXERCICE --------------------------------------------------------
+    Une fois que la commande livrée (state === 2) on ajoute  un bouton avec un icon
+    corbeille pour passer l'etat de la commande à removed et le sortir du dom
+    grace à notre animation angular
 
-            
-CHAPITRE 8 - UTILISER LES CONSTANTES--------    
-      8.1 config.ts
-            exemple de CONSTANTES
-            creer un fichier app/config.ts       
-            8.1.1 export class config
-            8.1.2 declaration 2 CONSTANTES
+        4.1 item.component.html
+            4.1.1 ajout div et button si etat ===2
+        4.2 app.component.ts
+            4.2.1 suppression setTimout()
+        4.3 item.component.ts
+            4.3.1 creation fonction deletItem()
 
-     8.2 app.component.ts     
-            8.2.1 import la class config
-            8.2.2 use constantes dans constructor
+ CHAPITRE 5 - UTILISER LA LIBRAIRIE ANIMATE.CSS 
 
-  
-  EXERCICES SUR LES CONSTANTES
-   dans config.ts créer une constante pour la collection avec la collection de base.
-   appeler la constante BASE_COLLECTION. utiliser la constante dans app.component.ts
+        5.1 item.componet.ts
+           On veut que quand les annel disparaissent une animation rubberband.
+           après avoir passé une commande en Livrée, la courbeille apparait et quans on clique sur la corbeille
+           on veut une animation fadeOut.
+           Ensuite on veut que le pannel dissparaisse du dom grace a un ngIf.
+           quand le pannel apprait animatState vaut 'inactive'
+           (models/item.ts) donc dans le html [ngClass] applique la class 'rubberband'
+           quand on clique sur la corbeille, la méthode deleteItem() (item.component.ts)
+           passe animateState a 'removed' donc le html [ngClass] applique la class
+           'fadeOut
 
+           dans la méthode deleteItem(), un steTimeout() passe animateState à 'removedFromDom'
+            après 5 secondes, doc dans le html le *ngIf sur le pannel empeche le pannel de s'afficher
+            dans le dom.
 
-      8.3 config.ts
-             8.3.1 import class Item
-             8.3.2 declaration constante BASE_COLLECTION
-             8.3.3 couper coller tableau collection depuis app.compontent.ts
+    5.1 app.component.ts
+              5.1.1 supprimer setTimeout()  dans createobject() 
+    5.2 item.component.ts
+              5.2.1 dans deleteItem() ajouter setTimeout() pour passer à l'état
+              removedFromDom
+              5.2.2 supprimer animations dans @componet
+              5.2.3 supprimer les imports pour animations
+     5.3 item.componet.html
+              5.3.1 modifier *ngIf pour supprimer pannel si annimateState = removedFromDom
+              5.3.2 drective [ngClass] pour rubberBand ou fadeOut selon valeur de
+              animateStaete
 
-      8.4 app.component.ts
-             8.4.1 user BASE_COLLECTION pour init variable collection dans CONSTRUCTOR       
+     5.4 models/item.ts
+              5.4.1supprimer toggleAnimateState()
+
+ CHAPITRE 6 - CREATION 
+
+              Pour utiliser la création et l'utilisiation de modules on va créer module
+              uniquement pour afficher le titre de l'appli et on va l'importer entièrement
+              dans notre module principale
+
+              creer un dossier title dans app
+              créer  un fichier title.module.ts
+              créer les fichiers title.component.ts, .css, .html
+
+       6.1 title.componet.ts
+             6.1.1 import de ngModule
+             6.1.2 import de Titlecompont
+             6.1.3 creer le @ngModule
+             6.1.4 declaration de TitleComponet
+             6.1.5 exports TitleComponent
         
+        6.2 title.componet.ts
+             6.2.1 import de component de config
+             6.2.2 creer @component
+             6.2.3 Creer class TitleComponet
+             6.2.4 private title
+             6.2.5 init this.title dans constructeur
 
-CHAPITRE 9 - UTILISER LES FORMULAIRES--------    
-       ON VEUT AJOUTER UN ITEM 0 L4AIDE D4UN FORMULAIRE ET V2RIFIER QUE LE FORMULAIRE
-       EST VALIDE AVANT D AJOUTER L ITEM
-         9.1 app.component.html
+        6.3 title.component.html
+            6.3.1 couper coller la h1 depuis app.component.html
 
-           9.1.1 add form avec une référence #itemForm="ngForm"
-           9.1.2 add attr html aux input (name, required, minLength)
-           9.1.3 use directive [disabled]="!itemForm" qui disabled le  
-                 bouton tant que le le formulaire est invalide 
-                 9.1.4 add #ref sur premier input cablé à ngModel
-                 9.1.5 add span avec directive [hidden] pour afficher message erreur si
-                 champ mal rempli
-
-              
-CHAPITRE 10 - CREER UN SOUS COMPOSANT--------   
-      On veut créer un composant qui s'occupe d'afficher uniquement les items
-      créer fichier item.component.ts, html, .css
-      10.1 item.component.html
-
-         10.1.1 couper coller contenu de la boucle for depuis app.component.html
-    10.2 item.component.ts
-         10.2.1 imports de component, item, de Item et de input
-         10.2.2 @Component pour déclarer notre composant avec un selector, un template html, un un urlStyles
-         10.2.3 export de la class ItemComponent    
-         10.2.4 creer @Input() item 
-     10.3 app.component.html
-         10.3.1utiliser @input() iem dans la balise <item-rootcomponent>  
-
-     10.4 app.module.ts
-        10.4.1 import de ItemComponent
-        10.4.2 declarer la class ItemComponent dans @ngModule
-     10.5 item.component.css     
-
-CHAPITRE 11- OUTPUT---------------------------------------------------
-         11.1 item.component.ts
-             11.1.1 import Output et EventEmitter
-             11.1.2  on ndéclare le Output qui prend un new EventEmitter
-             11.1.3 creer getDetails
-             11.1.4 use methode emit sur l'evenement pour emmetre un item
-         11.2 app.component.html
-             11.2.1 dans le selector <item-component> on utilise l'EvenetEmitter
-              pour appeler la fonction getDetails() qui se trouve sur ce composant
-               et on lui passe $event qui contient un item    
-         11.3 app.component.ts
-               11.3.1 recuperer l'item et l'afficher dans la console   
-
-CHAPITRE 12- EXERCICE---------------------------------------------------
-  En prenant exemple sur item.component, créer un composant appelé
-  itemform.compont qui ne contiendra que le formulaire
+        6.4 title.component.html
+             6.4.1 utiliser selecteur <app-title> pour afficher le template title.componet.html
 
 
-  CHAPITRE 13- LES PIPES---------------------------------------------------
-      On veut créer UN PIPE PERSONALISé POUR FAIRE UN MOTEUR de recherche
-          sur les propriètés name
-          créer un dossier PIPES et un fichier item.filter.ts
-    13.1 item.filter.ts
-        13.1.1 import de pipe et pipeTransform
-        13.1.2 declarer @PIPE
-        13.1.3 utilisation methode pipeTransform
-        13.1.4 return tableau à partir de notre collection filtrée
+         6.5 app.component.ts
+              6.5.1 import du module TitleModule
+              6.5.2 declarer TitleModule dans les imports             
 
-    13.2 app.component.html
-        13.2.1 add input pour saisi d'une chaine de recherche avec ref et keyup
-        13.2.2 utilisation du pipe dans la boucle ngFor sur la collection    
+CHAPITRE 7 - CREER NOS PROPRE DIRECTIVE
 
-   13.3 app.module.ts
-        13.3.1  import de ItemPipe
-        13.3.2 declaration de ItemPipe  
+           Les directives permettent de donner les ordres, le plus souvent des ordres structurés (*ngIf, **ngFor ...)
+           on trouve aussi des directives d'attribut et d'affichage ([ngClass], [hidden], [disabled]...)
+           elles permettent d'ajouter
+           du js dans le dom et d'agir sur l'affichage
 
-          
+           créer un dossier directives
+           créer highlight.directives.ts
+           

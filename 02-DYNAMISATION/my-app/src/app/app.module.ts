@@ -6,21 +6,23 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { ItemComponent } from './item.component';
 import { ItemFormComponent } from './itemform.component';
-      //  13.3.1  import de ItemPipe
-import { ItemPipe } from './pipes/item.filter';
+import { ItemPipe } from './pipes/item.filter'; 
+import { TitleModule } from './title/title.module';
+import { HightLightDirective } from './directives/highlight.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ItemComponent, // 10.4.2 declarer la class ItemComponent dans @ngModule
+    ItemComponent, 
     ItemFormComponent,
-    // 13.3.2 declaration de ItemPipe 
-    ItemPipe
+    ItemPipe,
+    HightLightDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    TitleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
