@@ -9,10 +9,6 @@ import { ItemFormComponent } from './itemform.component';
 import { ItemPipe } from './pipes/item.filter'; 
 import { TitleModule } from './title/title.module';
 import { HightLightDirective } from './directives/highlight.directive';
-import { StateDirective } from './directives/state.directive';
-import { ItemService } from "app/services/item.service";
-import { Config } from "app/config";
-import { AppRoutingModule } from "app/app-routing.module";
 
 @NgModule({
   declarations: [
@@ -20,18 +16,15 @@ import { AppRoutingModule } from "app/app-routing.module";
     ItemComponent, 
     ItemFormComponent,
     ItemPipe,
-    HightLightDirective,
-    StateDirective
+    HightLightDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    TitleModule,
-    AppRoutingModule
+    TitleModule
   ],
-  providers: [Config,
-              ItemService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { } // export pour rendre la classe "exportable"

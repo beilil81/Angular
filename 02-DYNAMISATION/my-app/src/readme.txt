@@ -143,4 +143,108 @@ CHAPITRE 7 - CREER NOS PROPRE DIRECTIVE
 
            créer un dossier directives
            créer highlight.directives.ts
-           
+
+CHAPITRE 8 - CREER UNE DRECTIVE D'AFFICHAGE--------------------------------------
+
+  
+    sur item.component.html on utilise 3 sapn avec des ngIf pour afficher les 
+    états de chaque commande, on va créer une directive pour remplacer dans le html
+    ces 3 soan par un seul element html qui jouera la logique développé dans notre
+    directive.
+
+    l'avantage de la directive ce que on peut l'utilser dans plusieurs composants
+    si on vient faire un modif dans notre directive elle va s'appliquer à tous nos composants.
+     créer un directive state.directive.ts( ng g directive state)
+      8.1 state.directive.ts
+         8.1.1 @input pour récuperer le state
+         8.1.2 injection de ElementRef et Renderer dans le constructor
+         8.1.3 utiliser le cycle ngOnChanges pour modifier le texte et la class de 
+         l'element natif dans le html à chaque chargement dans la page
+         8.1.4 déclarer 3 variables pour la class, le texte et le noeud html
+         8.1.5 switch pour générer une class et un text en fonction du tate 
+         8.1.6 utiliser setElementClass() pour ajouter la bonne class au noeud html
+         8.1.7 utiliser innerHTML pour ajouter du texte dans le noeud html
+
+      8.2 item.component.html
+         8.2.1 utiliser notre directive avec la balise <appState></appState> et
+         l'@Input state
+
+      8.3 app.module.ts (imports et déclarer authomatique lors de la creation de la 
+       directive avec ng generate..)      
+     
+CHAPITRE 9 - CREER UN SERVICE POUR GERER LES ITMES-----------------------------------
+         créer un dossier 'services' 
+
+         on veut créer un service qui gére tout les items et les méthodes des item, 
+         ajouter et supprimer des items  
+         
+         ng g service item
+
+        9.1 item.service.ts
+           9.1.1 variables  emptyItem
+           9.1.2 constructor appel resetItem() pour init variable emptyItem
+           9.1.3 collection d'item 
+           9.1.4 creation d'une méthode add pour ajouter des item 
+           9.1.5 methode ChangeState()
+           9.1.6 methode delete()
+           9.1.7 methode resetItem()
+
+        9.2 item.component.html
+            9.2.1 a chaque appel de la methode changeState() on passe 1 iem en paramètre
+            9.2.2 à l'appel de deleteItem() on passe un item en paramètre
+            9.2.3 couper coller le ngFor depuis app.component.html
+            9.2.4 couper coller le input de recherche depuis app.compont.html
+
+        9.3 item.component.ts
+            9.3.1 class implements OnInit
+            9.3.2 import OnInit
+            9.3.3 utiliser methode ngOnInit() pour initialiser nos variables 
+            9.3.4 injection ItemService dans constructor
+            9.3.5 changeState() utilise la methode changeState() de ItemService
+            9.3.6 deleteItem() utilise la methode delete de ItemService  
+            9.3.7 supprimer les @Input() et @OutPut
+            9.3.8  supprimer les imports Imput et OutPut, EventEmiter  
+
+        9.4 itemform.componet.ts
+
+             9.4.1 class implements OnInit
+             9.4.2 import de OnInit
+             9.4.3 methode OnInit avec ngOnInit
+             9.4.4 methode createObject() qui utilise add() et emptyItem de ItemService
+             9.3.5 supprimer les imports Imput et OutPut, EventEmiter  
+             
+
+        9.5 config.ts
+             9.5.1 on garde uniquement 2 variables pour title et version
+
+        9.6 app.compont.html
+             garder uniquement les selectors pour item-componet, item-form et app-title
+
+        9.7 app.componet.ts
+             9.7.1 import de ItemService
+             9.7.2 implementation de OnInit
+             9.7.3 import de OnInit
+             9.7.4 injection dans le constructeur
+             9.7.5 utilisiation methode ngOnInit()
+
+
+CHAPITRE 10 - ROUTERS-----------------------------------   
+            On veut créer deux routes pour chaqu'un de nos composants avec une page,
+            affiche la collection et une page qui affiche le formulaire
+       10.1 app.routing.module.ts
+            10.1.1 import de nos composants, ngModule, Route, Route, RouterModule
+            10.1.2 const qui contient toutes nos routes
+            10.1.3 declaration de @ngModule
+            10.4.4 RouterModule.forRoot(appRoutes) dans imports
+            10.1.5 RouterModule dans les exports
+  
+       10.2 app.module.ts
+
+            10.2.1 imprt de AppRoutingModule (notre class qui contient les routes)
+            10.2.2 ajouter AppRoutingModule dans les imports
+
+       10.3 app.copont.html
+       
+            10.3.1 ajouter une naviigation avec 2 lien vers nos routes
+            10.3.2 ajouter  la balise <router-outlet> qui va afficher nos
+            componets en fonction de nos routes       

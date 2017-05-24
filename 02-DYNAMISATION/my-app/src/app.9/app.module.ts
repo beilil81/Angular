@@ -12,7 +12,6 @@ import { HightLightDirective } from './directives/highlight.directive';
 import { StateDirective } from './directives/state.directive';
 import { ItemService } from "app/services/item.service";
 import { Config } from "app/config";
-import { AppRoutingModule } from "app/app-routing.module";
 
 @NgModule({
   declarations: [
@@ -27,8 +26,7 @@ import { AppRoutingModule } from "app/app-routing.module";
     BrowserModule,
     FormsModule,
     HttpModule,
-    TitleModule,
-    AppRoutingModule
+    TitleModule
   ],
   providers: [Config,
               ItemService],
